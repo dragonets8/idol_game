@@ -37,7 +37,7 @@ class GuideUtils {
     getDevideInfo().then((deviceInfo) async {
       deviceInfo["address"] = walletAddress;
       deviceInfo["addressName"] = walletName;
-      deviceInfo["clientNo"] = "01";
+      deviceInfo["clientNo"] = "05";
       deviceInfo["method"] = walletType;
       deviceInfo["channel"] = 1;
       DioManager().request<dynamic>(Apis.bindAddress, params: deviceInfo,
