@@ -1,0 +1,871 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
+.mac-os-11 { --title-bar-height: 28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857143; overflow-x: hidden; background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; tab-size: 4; background-position: inherit; background-repeat: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font-family: inherit; font-size: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right-width: 0px; background-color: inherit; }
+.CodeMirror-linenumber { }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; position: relative !important; background-position: inherit; background-repeat: inherit; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; background-position: 0px 0px; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background-color: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background-color: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; }
+a.md-print-anchor { white-space: pre !important; border: none !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; text-shadow: initial !important; background-position: 0px 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom-width: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background-color: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; background-position: inherit; background-repeat: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex: 2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.428571429rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left-width: 28px; border-left-style: solid; border-left-color: transparent; border-right-width: 28px; border-right-style: solid; border-right-color: transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right-width: 8px; border-right-style: solid; border-right-color: transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+
+
+/**
+ * NexT for Typora
+ * Brought to you by Bill Chen || https://github.com/BillChen2K/typora-theme-next
+ *
+ * - Want code ligatures for JetBrains Mono?
+ * - Search for `font-variant-ligatures: none;` and comment that line.
+ *
+ * - Want to change the font size in exported pdf?
+ * - Change the variable `--export-font-size` below.
+ **/
+
+:root {
+    --base-font-size: 16px;
+    --highlight-color: rgb(0, 160, 160);
+    --text-color: #333;
+    --headings-color: #262a30;
+    --export-font-size: 13px;
+    --select-text-bg-color: #262a30;
+    --select-text-font-color: #eee;
+}
+
+* {
+    /* Disable ligatures */
+    font-variant-ligatures: none;
+}
+
+
+/* latin-ext */
+
+/* latin */
+
+/* latin-ext */
+
+/* latin */
+
+/* latin-ext */
+
+/* latin */
+
+/* latin-ext */
+
+/* latin */
+
+/* latin-ext */
+
+/* latin */
+
+/* latin-ext */
+
+/* latin */
+
+html,
+body,
+#write {
+    color: var(--text-color);
+    font-size: var(--base-font-size);
+    background: #fcfcfc;
+    font-family: Overpass, "GlowSansSC", "Helvetica Neue", "pingfang sc", "microsoft yahei", sans-serif;
+    font-weight: 400;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    /* letter-spacing: -0.5px; */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--headings-color);
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 20px 0 15px
+}
+
+.CodeMirror pre {
+    font-family: 'JetBrains Mono';
+    font-size: 0.95em;
+    line-height: 1.65em;
+}
+
+#write {
+    max-width: 914px;
+    text-align: justify;
+}
+
+#write>h1:first-child {
+    margin-top: 1.75rem;
+}
+
+#write>h2:first-child {
+    margin-top: 1.5rem;
+}
+
+#write>h3:first-child {
+    margin-top: 1rem;
+}
+
+#write>h4:first-child {
+    margin-top: 0.5rem;
+}
+
+h1 {
+    font-size: 2.5em
+}
+
+h2 {
+    font-size: 1.75 em
+}
+
+h3 {
+    font-size: 1.45em
+}
+
+h4 {
+    font-size: 1.25em
+}
+
+h5 {
+    font-size: 1.1em
+}
+
+h6 {
+    font-size: 1em;
+    font-weight: bold
+}
+
+#write code {
+    color: var(--highlight-color);
+}
+
+p {
+    color: var(--text-color);
+    line-height: 1.7rem;
+    margin: 0 0 8px;
+}
+
+#write ul {
+    line-height: 1.75rem;
+    margin-block-start: 0.6em;
+    margin-block-end: 0.6em;
+}
+
+#write ol li {
+    line-height: 1.75rem;
+    margin-block-start: 0.6em;
+    margin-block-end: 0.6em;
+}
+
+u {
+    text-decoration: none;
+    border-bottom: 1px solid #999;
+}
+
+#write>h3.md-focus:before {
+    left: -1.875rem;
+    top: 0.5rem;
+    padding: 2px;
+}
+
+#write>h4.md-focus:before {
+    left: -1.875rem;
+    top: 0.3125rem;
+    padding: 2px;
+}
+
+#write>h5.md-focus:before {
+    left: -1.875rem;
+    top: 0.25rem;
+    padding: 2px;
+}
+
+#write>h6.md-focus:before {
+    left: -1.875rem;
+    top: .125rem;
+    padding: 2px;
+}
+
+@media screen and (max-width: 48em) {
+    blockquote {
+        margin-left: 1rem;
+        margin-right: 0;
+        padding: 0.5em;
+    }
+    /* .h1,
+    h1 {
+        font-size: 2.827rem;
+    }
+    .h2,
+    h2 {
+        font-size: 1.999rem;
+    }
+    .h3,
+    h3 {
+        font-size: 1.413rem;
+    }
+    .h4,
+    h4 {
+        font-size: 1.250rem;
+    }
+    .h5,
+    h5 {
+        font-size: 1.150rem;
+    }
+    .h6,
+    h6 {
+        font-size: 1rem;
+    } */
+}
+
+a .md-def-url {
+    color: #262a30;
+}
+
+a {
+    color: var(--highlight-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition-duration: 0.5s;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 1em;
+    margin: 0 0 20px;
+    width: 100%;
+}
+
+table tr:nth-child(2n),
+thead {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background: #f5f5f5
+}
+
+caption,
+td,
+th {
+    font-weight: 400;
+    padding: 8px;
+    text-align: left;
+    vertical-align: middle
+}
+
+table tr th {
+    border-bottom: 3px solid #ddd;
+    font-weight: 700;
+    padding-bottom: 10px;
+    background-color: var(--bg-color);
+}
+
+td,
+th {
+    border: 1px solid #ddd;
+}
+
+th {
+    font-weight: 700;
+    padding-bottom: 10px
+}
+
+td {
+    border-bottom-width: 1px
+}
+
+
+/* Inline Code */
+
+code,
+.md-fences {
+    background: #eee;
+    border-radius: 3px;
+    color: #555;
+    padding: 2px 4px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    font-family: 'JetBrains Mono';
+    font-size: 0.935em;
+}
+
+
+/* Code Blocks */
+
+.md-fences {
+    margin: 0 0 20px;
+    font-size: 0.9em;
+    line-height: 1.5em;
+    padding: 0.4em 1em;
+    padding-top: 0.4em;
+}
+
+.task-list {
+    padding-left: 0;
+}
+
+.task-list-item {
+    padding-left: 2rem;
+}
+
+.task-list-item input {
+    top: 3px;
+}
+
+.task-list-item input {
+    outline: none;
+    margin-bottom: 0.5em;
+}
+
+.task-list-item input::before {
+    content: "";
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid gray;
+    background-color: #fdfdfd;
+    margin-left: -0.1rem;
+    margin-right: 0.1rem;
+    margin-top: -0.9rem;
+}
+
+.task-list-item input:checked::before {
+    padding-left: 0.125em;
+    content: '✔';
+    /*◘*/
+    font-size: 0.8125rem;
+    line-height: 0.9375rem;
+    margin-top: -0.9rem;
+}
+
+
+/* Chrome 29+ */
+
+@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution:.001dpcm) {
+    .task-list-item input:before {
+        margin-top: -0.2rem;
+    }
+    .task-list-item input:checked:before,
+    .task-list-item input[checked]:before {
+        margin-top: -0.2rem;
+    }
+}
+
+blockquote {
+    border-left: 4px solid #ddd;
+    color: #666;
+    margin: 0;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 0 15px
+}
+
+blockquote p {
+    color: #666
+}
+
+blockquote cite::before {
+    content: '-';
+    padding: 0 5px
+}
+
+
+/* #write pre.md-meta-block {
+    min-height: 30px;
+    background: #f8f8f8;
+    padding: 1.5em;
+    font-weight: 300;
+    font-size: 1em;
+    padding-bottom: 1.5em;
+    padding-top: 3em;
+    margin-top: -1.5em;
+    color: #999;
+    border-left: 1000px #f8f8f8 solid;
+    margin-left: -1000px;
+    border-right: 1000px #f8f8f8 solid;
+    margin-right: -1000px;
+    margin-bottom: 2em;
+    font-size: 0.8em;
+    line-height: 1.5em;
+    font-family: 'JetBrains Mono';
+} */
+
+#write pre.md-meta-block {
+    padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f1f1f1;
+    border: 0;
+    border-radius: 3px;
+    color: hsl(0, 0%, 53%);
+    margin-top: 0 !important;
+    margin-bottom: 2em;
+    font-size: 0.8em;
+    line-height: 1.5em;
+    font-family: 'JetBrains Mono';
+}
+
+.MathJax_Display {
+    font-size: 0.9em;
+    margin-top: 0.5em;
+    margin-bottom: 0;
+}
+
+p.mathjax-block,
+.mathjax-block {
+    padding-bottom: 0;
+}
+
+.mathjax-block>.code-tooltip {
+    bottom: 5px;
+    box-shadow: none;
+}
+
+.md-image>.md-meta {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.md-image>img {
+    margin-top: 2px;
+}
+
+.md-image>.md-meta:first-of-type:before {
+    padding-left: 4px;
+}
+
+#typora-source {
+    color: #555;
+}
+
+
+/** ui for windows **/
+
+#md-searchpanel {
+    border-bottom: 1px solid #ccc;
+}
+
+#md-searchpanel .btn {
+    border: 1px solid #ccc;
+}
+
+#md-notification:before {
+    top: 14px;
+}
+
+#md-notification {
+    background: #eee;
+}
+
+.megamenu-menu-panel .btn {
+    border: 1px solid #ccc;
+}
+
+#write>h3.md-focus:before {
+    left: -1.5625rem;
+    top: .375rem;
+}
+
+#write>h4.md-focus:before {
+    left: -1.5625rem;
+    top: .285714286rem;
+}
+
+#write>h5.md-focus:before {
+    left: -1.5625rem;
+    top: .285714286rem;
+}
+
+#write>h6.md-focus:before {
+    left: -1.5625rem;
+    top: .285714286rem;
+}
+
+.md-image>.md-meta {
+    border-radius: 3px;
+    padding: 2px 0 0 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: inherit;
+}
+
+.md-toc {
+    margin-top: 20px;
+    padding-bottom: 5px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #efefef;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+#md-notification:before {
+    top: 10px;
+}
+
+
+/** focus mode */
+
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state {
+    visibility: visible;
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+.html-for-mac .context-menu {
+    --item-hover-bg-color: #E6F0FE;
+}
+
+.file-tree-node {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.file-node-title {
+    padding-top: 2px;
+}
+
+.outline-item {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+
+/* 
+.modal-footer .btn-default,
+.modal-footer .btn-primary {
+    border: 2px solid #222;
+}
+
+
+
+#md-searchpanel .btn:not(.close-btn):hover {
+    background: #fff;
+    border-color: #222;
+    color: #222;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#md-searchpanel .btn:not(.close-btn) {
+    background: #222;
+    border-color: #222;
+    color: #fff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    transition-duration: .2s;
+}
+
+.searchpanel-search-option-btn {
+    border-radius: 0px;
+    border: 1px solid #222;
+} */
+
+/* Search panel & UI */
+
+#md-searchpanel .btn {
+    border: none;
+}
+
+#md-searchpanel input {
+    box-shadow: none;
+}
+
+.searchpanel-search-option-btn {
+    border-color: #aaa;
+    border-radius: 0;
+}
+
+.modal-dialog .btn {
+    background: #222;
+    border-width: 2px;
+    border-color: #222;
+    border-radius: 0;
+    color: #fff;
+    display: inline-block;
+    font-size: .875em;
+    line-height: 2rem;
+    padding: 0 20px;
+    margin: 5px;
+    text-decoration: none;
+    transition-delay: 0s;
+    transition-duration: .2s;
+    transition-timing-function: ease-in-out
+}
+
+.modal-dialog .btn:hover {
+    background: #eee;
+    border-color: #222;
+    color: #222;
+}
+
+
+/* Printing issue */
+
+.typora-export * {
+    -webkit-print-color-adjust: exact;
+}
+
+.typora-export p {
+    font-size: var(--export-font-size) !important;
+}
+
+.typora-export li {
+    font-size: var(--export-font-size);
+    line-height: 2rem;
+}
+
+.typora-export #write {
+    font-size: var(--export-font-size) !important;
+}
+
+table,
+pre {
+    page-break-inside: avoid;
+}
+
+pre {
+    word-wrap: break-word;
+}
+
+hr {
+    background-image: repeating-linear-gradient(-45deg, #ddd, #ddd 4px, transparent 4px, transparent 8px);
+    border: 0;
+    height: 3px;
+    margin: 40px 0
+}
+
+ @media print { @page {margin: 0 0 0 0;} body.typora-export {padding-left: 0; padding-right: 0;} #write {padding:0;}}
+</style><title>Greetings players,</title>
+</head>
+<body class='typora-export'><div class='typora-export-content'>
+<div id='write'  class=''><p><span>Greetings players,</span></p><p><span> </span></p><p><span>These terms of service (the “Terms”) set out the terms and conditions by which XWG Games offers you access to use and enjoy our games, apps, websites and other services (the “XWG Services”). When we say “XWG Games,” we’re referring to the XWG Games entity responsible for providing the XWG Services in your region (see Section 19, below) and these Terms are an agreement between you and that entity.</span></p><p><span> </span></p><p><span>Please read these Terms carefully and pay particular attention to these items:</span></p><p><span> </span></p><p><span>Dispute Resolution. If you reside in the United States, please read the binding arbitration clause and class action waiver in Part A of Section 17. It affects how disputes between us are resolved.</span></p><p><span>Virtual Content. When you click to purchase, earn or are gifted Virtual Content, you only get a license to access Virtual Content. You have no ownership in any of the Virtual Content you unlock and you can’t transfer it to someone else. Virtual Content has no monetary value, is generally game specific and you can’t redeem Virtual Content for any type of “real world” money.</span></p><p><span>Refund Policy. You lose the right to change your mind, cancel the order and get a refund if you get immediate access to or download your digital content. There are some exceptions to this rule, but we have a strict policy on refunds. Read about it here.</span></p><p><span>User Rules. You agree to follow our User Rules (Section 7). These rules govern both in-game behavior and certain out-of-game conduct while using the XWG Services.</span></p><p><span> </span></p><p><span>Attention Parents!</span></p><p><span>We provide game rating info on our website about age appropriateness. We also encourage you to supervise your child’s online activities, review the content they are accessing and, as appropriate, monitor their social interactions. For more info on game ratings and content descriptors, please check your local ratings system.</span></p><p><span> </span></p><p><span>TABLE OF CONTENTS</span></p><p><span>1.YOUR ACCOUNT</span></p><p><span>2.ACCOUNT TERMINATION</span></p><p><span>3.LIMITED LICENSE</span></p><p><span>4.VIRTUAL GOODS, GAME CURRENCY AND PURCHASES</span></p><p><span>5.FEES &amp; TAXES</span></p><p><span>6.UNSOLICITED IDEA SUBMISSION POLICY</span></p><p><span>7.USER RULES</span></p><p><span>8.USER GENERATED CONTENT</span></p><p><span>9.MONITORING &amp; ANTI-CHEAT</span></p><p><span>10.UPDATES AND MODIFICATIONS</span></p><p><span>11.LINKS</span></p><p><span>12.NOTICE AND PROCEDURE FOR CLAIMS OF COPYRIGHT INFRINGEMENT</span></p><p><span>13.WARRANTY DISCLAIMER</span></p><p><span>14.INDEMNIFICATION</span></p><p><span>15.LIMITATION OF LIABILITY</span></p><p><span>16.GOVERNING LAW</span></p><p><span>17.DISPUTE RESOLUTION</span></p><p><span>18.ADDITIONAL TERMS APPLICABLE TO XWG SERVICES</span></p><p><span>19.MISCELLANEOUS</span></p><p><span> </span></p><ol><li><span>YOUR ACCOUNT</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>1.1. Am I eligible to create an account and use the XWG Services? (You either must be an adult or have permission from your parents or legal guardian.)</span></p><p><span>You’ll need a XWG Games account to access many of our services. To create an account and use the XWG Services, you must: (i) be an adult; (ii) be an emancipated minor; or (iii) have valid parent or legal guardian consent to be bound by these Terms. If you’re not an adult or emancipated minor, or don’t understand this Section, please talk to your parents or legal guardian and ask for help. If you are the parent or legal guardian of a minor who creates an account with us, you and the minor accept and agree to be bound by these Terms. You are also responsible for all use of the account and compliance with these Terms by the minor, including all purchases made on the account. You may not create or use an account or use any of the XWG Services on behalf of any other person or other legal entity or for a commercial purpose.</span></p><p><span> </span></p><p><span>1.2. How can I create an account? (On our website or by using social authentication.)</span></p><p><span>You can create an account with unique login credentials on our websites or by logging into the XWG Services with an existing social media account (if applicable).</span></p><p><span> </span></p><p><span>1.3. Do I need to provide my real name and stuff? (Yes. Please don’t try to pull any kind of “Definitely Not Blitzcrank” or “Definitely Not Udyr” funny business.)</span></p><p><span>You must always supply us with accurate and complete info including your real name.</span></p><p><span> </span></p><p><span>1.4. I have a ton of different email accounts. Does it matter which one I use to register my account? (Yes. Otherwise, you might miss important notices!)</span></p><p><span>We send account, legal and service related notices to the email address registered to your account. These notifications may be really important (e.g., a notification that we intend to terminate your account for inactivity) so you must keep the email address associated with your account current and (if we ask) verified. If you create an account by logging in to the XWG Services with a social media account, your XWG Games account email will be the email address associated with that social media account.</span></p><p><span> </span></p><p><span>1.5. Can I share or sell my account or login credentials? (No.)</span></p><p><span>When you create an account with us, we require you to select a unique username and password (collectively, your “Login Credentials”). You agree that:</span></p><p><span> </span></p><p><span>You can’t share your account or Login Credentials with anyone.</span></p><p><span>You can’t sell, transfer or allow any other person to access your account or Login Credentials, or offer to do so.</span></p><p><span>You must keep your Login Credentials secret.</span></p><p><span>You must notify us immediately if you become aware of any breach of security, including any unauthorized account access or any loss, theft or unauthorized use or disclosure of your Login Credentials or payment info so we can take appropriate steps. You are responsible for all losses (including loss or use of Virtual Content) on your account where you have shared your Login Credentials or have failed to keep your account or Login Credentials secure.</span></p><p><span> </span></p><ol><li><span>ACCOUNT TERMINATION</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>2.1. How can my account be suspended or terminated? (If you break the rules, Demacian Justice will be visited upon your account!)</span></p><p><span>2.1.1. You. You may terminate or suspend your account at any time by contacting us at service@xwg.games.</span></p><p><span> </span></p><p><span>2.1.2. Us. We may terminate or suspend your account without notice to you if we reasonably determine, that:</span></p><p><span> </span></p><p><span>you have breached any part of these Terms (including the User Rules);</span></p><p><span>doing so would be in the best interests of our community or the XWG Services or is required for upholding a third party’s rights;</span></p><p><span>we have stopped offering the XWG Services in your region (though we’ll normally post advance notice on our website, app or game if we plan to stop offering a material core feature of a game or all of the XWG Services in your region);</span></p><p><span>you have failed to pay any fees you owe us (except in cases of our gross negligence or willful misconduct) or we have to refund someone due to unauthorized use of a payment made from your account; or</span></p><p><span>you have (or we have reasonable grounds for suspecting that you have) made unauthorized use of someone else’s payment info.</span></p><p><span>We can make such determinations, with the assistance of automated systems and machine learning tools or by using other methods that we think are appropriate. If you think that we have made a mistake, please Contact Us with details and we will review your case, though we may suspend your account during our review. You can also challenge our determinations (see Section 17).</span></p><p><span> </span></p><p><span>2.2. Will XWG maintain my account forever, even if I stop using it? (If you abandon your account for a very long period of time, we may terminate it after giving you notice and an opportunity to re-activate it.)</span></p><p><span>If you do not use your account for a prolonged period of time, we reserve the right to take measures against your account, including suspension or termination. If we plan to take measures against your account based on prolonged period of inactivity, we will let you know first (e.g., by email to the email address registered to your account) and give you ample opportunity to avoid such measures (e.g., deletion of your account).</span></p><p><span> </span></p><p><span>2.3. What happens if XWG terminates my account? (No games for you and you will lose access to any purchases including Game Currency and Virtual Goods.)</span></p><p><span>If your account is terminated, you’ll no longer have access to your account, including any of the associated data or Virtual Content (including Game Currency) (though this does not limit or affect any rights you have under data or consumer protection laws). Where we terminate for a legitimate reason (e.g. where you have breached these Terms):</span></p><p><span> </span></p><p><span>you’ll not be entitled to any refunds and we’ll have no liability to you; and</span></p><p><span>we also reserve the right to terminate any other accounts you may have created, as well as your access to any other XWG Services (also without any refunds or liability to you).</span></p><p><span>You understand and agree that using the XWG Services comes with the risk that your account may be terminated or suspended in accordance with these Terms and that, whenever you use the XWG Services, you’ll bear this risk in mind and always conduct yourself appropriately.</span></p><p><span> </span></p><ol><li><span>LIMITED LICENSE</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>3.1. What can I do with the XWG Services? (You can enjoy the XWG Services for your own, personal, non-commercial use.)</span></p><p><span>We grant you a limited, non-exclusive, non-transferable, revocable license to use and enjoy the XWG Services (and any Virtual Content) for your individual, non-commercial, entertainment purposes only and expressly conditioned upon your compliance with these Terms. If we terminate your account, any license granted by us to you in the XWG Services and any Virtual Content ends immediately. Unless otherwise expressly authorized by us in a signed written contract, you may not sell, copy, exchange, loan, reverse engineer, decompile, derive source code from, translate, lease, grant a security interest in, transfer, publish, assign or otherwise distribute any of the XWG Services or any of XWG Games’ intellectual property, including any of our computer code or Virtual Content.</span></p><p><span> </span></p><p><span>3.2. Can I do stuff with XWG’s intellectual property? (We reserve all the rights to our IP, but do allow for some personal, non-commercial uses, like fan art.)</span></p><p><span>We (and our licensors) own and reserve all rights, title and interest in and to the XWG Services, and all data and content posted, generated, provided or otherwise made available in or through the XWG Services, including, user accounts, computer code, titles, objects, artifacts, characters, character names, chat logs, game recordings and broadcasts, locations, location names, stories, dialog, catch phrases, artwork, graphics, structural or landscape designs, animations, sounds, musical compositions and recordings, virtual goods, in-game currency, audio-visual effects, character likenesses, methods of operation and gameplay (collectively, “Game Content”). For clarity, Game Content includes Virtual Content. You can’t create any work of authorship based on the Game Content or XWG Services except as expressly permitted by us. For more info about what fan uses we currently permit, please read our Legal Jibber Jabber policy (though be aware that we change this from time to time -- and for certain regions where we partner with third party publishers, the publisher&#39;s terms of service may supersede provisions in the policy).</span></p><p><span> </span></p><p><span>You also agree that unless we grant you a license, in a written contract signed by us, you may never use any of our trademarks, service marks, trade names, logos, domain names, taglines, or trade dress. Any reproduction, redistribution, or modification of the XWG Services, or use of the XWG Services not in accordance with these Terms, is expressly prohibited and may result in severe civil and/or criminal penalties.</span></p><p><span> </span></p><ol><li><span>VIRTUAL GOODS, GAME CURRENCY AND PURCHASES</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>4.1. What is Virtual Content? (Virtual content includes stuff like game currency and virtual goods, such as champions, skins, emotes, accessories, etc.)</span></p><p><span>When using the XWG Services, we may provide you with opportunities to acquire a limited license to access virtual goods, such as champions, skins, emotes, etc., (“Virtual Goods”) and in-game currency (“Game Currency”), associated with your account (collectively, “Virtual Content”).</span></p><p><span> </span></p><p><span>Game Currency may only be used for the specific game for which it was purchased unless we say otherwise at the time of purchase.</span></p><p><span> </span></p><p><span>4.2. How do I get a “license” to access Virtual Content? (Buy it, earn it, or receive it.)</span></p><p><span>We may provide you with various opportunities to acquire a limited license to access Game Currency or Virtual Content, including:</span></p><p><span> </span></p><p><span>purchasing it (e.g., with a credit card);</span></p><p><span>earning it (e.g., by accomplishing game missions or tasks); or</span></p><p><span>receiving it (e.g., from another player as a gift or using crafting functionality like Hextech®).</span></p><p><span>4.3. Do I “own” the Virtual Content I unlock? (No. What you “unlock” is not the virtual good itself, but rather, a non-transferable limited license to access it.)</span></p><p><span>You have no ownership or other property interest in any of the Virtual Content you unlock, regardless of how you acquired access to it. Virtual Content has no monetary value. You can’t transfer (unless we allow it in the functionality of the XWG Services) or redeem Virtual Content for any type of “real world” money. You can’t obtain any refunds for purchasing a license to access Virtual Content, except as expressly permitted by us. You can find our current content refund policy here.</span></p><p><span> </span></p><p><span>4.4. Once again: I don’t own my Virtual Content? (“No!” shouted all the lawyers.)</span></p><p><span>When you obtain Virtual Content from us, what we are actually giving you is a personal, non-exclusive, non-transferable, non-sublicenseable, revocable, limited right and license to use that Virtual Content only in connection with your use of the applicable XWG Services.</span></p><p><span> </span></p><p><span>Notwithstanding anything to the contrary in these Terms, you acknowledge and agree that you shall have no ownership or other property interest in your account, and that all rights in and to your account are and shall forever be owned by and inure to the benefit of XWG Games. You further acknowledge and agree that you have no title, ownership, or other proprietary interest in any Virtual Content, regardless of any consideration offered or paid in exchange. Furthermore, except in cases of willful misconduct or gross negligence, or to the extent these Terms say otherwise, XWG Games shall not be liable in any manner for the destruction, deletion, modification, impairment, hacking, or any other damage or loss of any kind caused to Virtual Content, including the deletion of Virtual Content upon the termination or expiration of your account or our reasonable changes to the XWG Services.</span></p><p><span> </span></p><p><span>4.5. Will my Virtual Content always be available? (Not necessarily, no.)</span></p><p><span>In an effort to constantly improve the XWG Services, evolve our games and keep the XWG Services, safe, fun, and secure, we have the right to delete, alter, move, remove, re-package, re-price, or transfer any and all Game Content, including Virtual Content, in whole or in part, at any time, with or without notice to you, and with no liability of any kind to you. For example, your Virtual Goods may (and likely will) evolve over time to improve the XWG Services or for regulatory or legal reasons. If we decide to entirely retire certain Virtual Goods that you recently purchased, we will provide you with a replacement. We won’t delete your Game Currency without notice (such as through posts on our website, app or game), unless your account is terminated by us for a legitimate reason or by you under Section 2.1.1. We may sometimes change the purchasing power of Game Currency (for example, we might increase the number of Game Currency needed to purchase Virtual Goods, such as skins). We normally only do this in incremental steps but we’ll give you notice (such as through posts on our website, app or game) if we plan to make changes that will significantly impact your Game Currency in a negative way. We don’t provide or guarantee, and expressly disclaim, any value, cash or otherwise, attributed to any data residing on servers we operate or control, including any Game Content or Virtual Content attributed to your account. If we allow the sale or transfer of your right to access certain Game Content or Virtual Content, it may only be conducted via services approved or provided by us, if any.</span></p><p><span> </span></p><ol><li><span>FEES &amp; TAXES</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>5.1. Is everything about the XWG Services free? (No.)</span></p><p><span>Some aspects of the XWG Services may require you to pay a fee, and you agree that you’ll provide accurate and complete payment info to us or the third-party payment provider used by us. You further agree to pay all fees and applicable taxes incurred on your account. We may revise the pricing for any part of the XWG Services at any time. This can impact on the purchasing power of your Game Currency, though we normally only do this in incremental steps. All fees and charges are payable in accordance with payment terms in effect at the time the fee or the charge becomes due and payable. We may, from time to time, modify, amend, or supplement our fees and fee-billing methods, and such changes shall be effective immediately upon posting in these Terms or elsewhere on our websites, apps or in our games. Except in cases of our gross negligence or willful misconduct, if you fail to pay any fees you owe to us or we have to refund someone due to unauthorized use of a payment made from your account, we may suspend or terminate your account. See Section 2 (Account Termination) for more info.</span></p><p><span> </span></p><p><span>Subject to applicable law, any applicable fees and other charges for fee-based services (including Game Currency) are payable in advance and aren’t refundable in whole or in part except as expressly provided in these Terms. Except in cases of XWG’s gross negligence, or willful misconduct or to the extent these Terms say otherwise, you’re fully liable for all charges to your account, including any unauthorized charges.</span></p><p><span> </span></p><p><span>5.2. What are my responsibilities relating to Game Currency? (Pay applicable taxes; verify that all transactions with us are correct, etc.)</span></p><p><span>You’re solely responsible for paying any applicable taxes related to acquiring, using, or accessing Game Currency. Game Currency may be sold or issued by us in bundles and the price may vary depending on the amount you purchase and where you’re purchasing. As we feel it necessary, in our reasonable discretion (or as prescribed by law), we may limit the total amount of Game Currency that may be purchased for any one game or that may be held in your account in the aggregate. Additionally, price and availability of Game Currency and Virtual Goods are subject to change. We may restrict how much Game Currency you can purchase and/or use based on your location as we have different approaches in different locations.</span></p><p><span> </span></p><p><span>You should verify that the proper amount of Game Currency has been added to or deducted from your account during any given transaction. Please notify us immediately if you believe that a mistake has been made with respect to your Game Currency balance. We’ll investigate your claim, and in doing so, may request some additional info to verify it.</span></p><p><span> </span></p><ol><li><span>UNSOLICITED IDEA SUBMISSION POLICY</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>6.1. Can I submit ideas for improving the Game to XWG? (Please don’t. If you do anyways, we’ll have the absolute right to use it forever.)</span></p><p><span>We value your feedback on the XWG Services, but please don’t submit any creative ideas, suggestions or materials to us (collectively, “Unsolicited Ideas”). We may freely use any Unsolicited Ideas you provide. This policy is aimed at avoiding potential misunderstandings or disputes when the XWG Services might seem similar to Unsolicited Ideas that people submit.</span></p><p><span> </span></p><p><span>You may not have any legal rights in the Unsolicited Ideas you insist on sending to us, but if you do, we will be allowed to use all or some of your Unsolicited Ideas for any reason we choose and without any payment to you.</span></p><p><span> </span></p><p><span>In legal terms, this means that if you submit Unsolicited Ideas to us, then you grant us a worldwide, perpetual, irrevocable, sublicenseable, transferable, assignable, non-exclusive, and royalty-free right and license to use, reproduce, distribute, adapt, modify, translate, create derivative works based upon, publicly perform, publicly display, digitally perform, make, have made, sell, offer for sale, and import your Unsolicited Ideas, including all copyrights, trademarks, trade secrets, patents, designs, industrial rights, and all other intellectual and proprietary rights related to them, in any media now known or in the future developed, for any purpose whatsoever, commercial or otherwise, including giving the Unsolicited Ideas to others, without any compensation to you. To the extent necessary, you agree that you undertake to execute and deliver any and all documents and perform any and all actions necessary or desirable to ensure that the rights to use the Unsolicited Ideas granted to us as specified above are valid, effective, and enforceable and you waive and agree never to assert those rights to the maximum extent permitted by the laws of your jurisdiction.</span></p><p><span> </span></p><ol><li><span>USER RULES</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>7.1. Can I troll, flame, threaten or harass people while using the XWG Services? (No. If you do, we might take action such as banning your account.)</span></p><p><span>While using the XWG Services, you must comply with all laws, rules and regulations in the jurisdiction in which you reside. You must also comply with the acceptable use and behavioral policies that we publish from time to time on our websites, apps and games and the behavioral rules listed below (collectively the “User Rules”). The User Rules posted to our websites, apps and games or set out in this Section are not meant to be exhaustive, and we reserve the right to modify them, as well as take appropriate disciplinary measures including temporary bans, account suspension or termination and deletion to protect the integrity and spirit of the XWG Services, regardless of whether a specific behavior is listed in the User Rules as inappropriate.</span></p><p><span> </span></p><p><span>The following are examples of behavior that warrant disciplinary measures:</span></p><p><span> </span></p><p><span>Impersonating any person, business or entity, including an employee of XWG Games, or communicating in any way that makes it appear that the communication originates from XWG Games;</span></p><p><span>Publicly posting identifying info about yourself, XWG Games employees, or other players;</span></p><p><span>Harassing, stalking or threatening other players or XWG Games employees;</span></p><p><span>Removing, altering or concealing any copyright, trademark, patent or other proprietary rights notice of XWG Games contained within the XWG Services. You also may not transmit content that violates or infringes the rights of others, including patent, trademark, trade secret, copyright, publicity, personal rights or other rights;</span></p><p><span>Transmitting or communicating any content which we reasonably believe to be offensive to players, including language that is unlawful, harmful, threatening, abusive, harassing, defamatory, vulgar, obscene, sexually explicit, or racially, ethically, or otherwise objectionable;</span></p><p><span>Transmitting or facilitating the transmission of any content that contains a virus, corrupted data, trojan horse, bot keystroke logger, worm, time bomb, cancelbot or other computer programming routines that are intended to and/or actually damage, detrimentally interfere with, surreptitiously intercept or mine, scrape or expropriate any system, data or personal info;</span></p><p><span>Avoiding, bypassing, removing, deactivating, impairing, descrambling or otherwise circumventing any technological measure implemented by XWG or any third party to protect or control access to the XWG Services or any part thereof;</span></p><p><span>Spamming chat, whether for personal or commercial purposes, by disrupting the flow of conversation with repeated postings;</span></p><p><span>Participating in any action which we reasonably believe does or may defraud any other player, including by scamming or social engineering;</span></p><p><span>Using any unauthorized third party programs, including mods, hacks, cheats, scripts, bots, trainers and automation programs that interact with the XWG Services in any way, for any purpose, including any unauthorized third party programs that intercept, emulate, or redirect any communication relating to the XWG Services and any unauthorized third party programs that collect info about the XWG Services by reading areas of memory used by the XWG Services to store info;</span></p><p><span>Accessing or attempting to access areas of the XWG Services that are not made available to the public;</span></p><p><span>Selecting an account or user name that is falsely indicative of an association with XWG Games, contains personally identifying info, or that is offensive, defamatory, vulgar, obscene, sexually explicit, racially, ethnically, or otherwise objectionable. You may not use a misspelling or an alternative spelling to circumvent this restriction on name choices, like user names. XWG Games may modify any name which XWG Games reasonably believes violates this provision, without notification to you, and may take further disciplinary measures, including account termination for repeated violations;</span></p><p><span>Non-participation, logging out or exiting a game during live game-play. XWG Games may track this data over time and issue a temporary ban when a player is determined to have left mid-game too many times. The length of the temporary ban will increase over time if a particular account continues to leave live game play;</span></p><p><span>Playing on another person’s account or otherwise engaging in activity intended to “boost” an account’s status or rank;</span></p><p><span>Inducing or encouraging others to breach the User Rules or these Terms; or</span></p><p><span>Using the XWG Services for any business purpose without our express written consent or after we’ve asked you to stop using the XWG Services.</span></p><ol><li><span>USER GENERATED CONTENT</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>8.1. Am I responsible for the content that I post on/in the XWG Services? (Yes, and we can use what you post.)</span></p><p><span>Apart from Unsolicited Ideas (which we address separately, in Section 6, above), you’re also responsible for any other communications, user names, images, sounds, or other material and info that you create, upload, use or transmit with or through the XWG Services (“Your Content”).</span></p><p><span> </span></p><p><span>You should upload or transmit Your Content only if you agree that:</span></p><p><span> </span></p><p><span>You grant us, from the time of uploading or transmission of Your Content, a worldwide, perpetual, irrevocable, sublicenseable, non-exclusive and royalty-free right and license to use, reproduce, distribute, adapt, modify, translate, create derivative works based upon, publicly perform, publicly display, digitally perform, make, have made, and import Your Content, including, all copyrights, publicity rights, trademarks, trade secrets, patents, industrial rights and all other intellectual and proprietary rights related to them, for the purpose of providing the XWG Services without any compensation to you;</span></p><p><span>You waive any moral rights you may have in Your Content with respect to our use of Your Content to the maximum extent permitted by the laws of your jurisdiction. If local laws do not allow for waiver of moral rights, instead you grant XWG Games the right to use Your Content and all elements of Your Content with or without your name or pseudonym, as well as to freely edit Your Content.</span></p><p><span>You represent, warrant and agree that none of Your Content will be subject to any obligation, whether of confidentiality, attribution or otherwise, on the part of XWG Games and XWG Games won’t be liable for any use or disclosure of Your Content.</span></p><p><span>You further represent, warrant and agree that Your Content shall not violate any third-party rights.</span></p><ol><li><span>MONITORING &amp; ANTI-CHEAT</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>9.1. Does XWG monitor me while using the XWG Services? (Yes. Please read the Privacy Notice to learn more.)</span></p><p><span>We may actively monitor the use of the XWG Services (but have no obligation to do so), both on our own servers and on your computer or device, for a wide variety of different purposes, including preventing cheating and hacking, reducing toxic player behavior, and improving the XWG Services. Please be sure to read our Privacy Notice for important details about how we obtain and process info in connection with your use of the XWG Services.</span></p><p><span> </span></p><p><span>9.2. Does XWG run programs on my device while I’m not using the XWG Services? (We may, for limited anti-cheat purposes.)</span></p><p><span>In order to prevent cheating and hacking, we may require you to install anti-cheat software. This software may run in the background of your device.</span></p><p><span> </span></p><ol><li><span>UPDATES AND MODIFICATIONS</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>10.1. Will these Terms change in the future? (Yes.)</span></p><p><span>We may (and probably will) create updated versions of these Terms in the future as the XWG Services and applicable laws evolve. When we do, we’ll inform you of the new agreement which will supersede and replace these Terms. You’ll be given an opportunity to review any new agreement we present to you and decide whether you wish to agree to the revised terms. If you accept the new agreement, you’ll be able to continue using the XWG Services. If you decline the new agreement, you won’t be able to use the XWG Services anymore.</span></p><p><span> </span></p><p><span>10.2. Will the XWG Services stay the same?</span></p><p><span>In an effort to constantly improve the XWG Services, evolve our games and keep the XWG Services, safe, fun, and secure, you agree that we may change, modify, update, suspend, “nerf,” or restrict your access to any features or parts of the XWG Services, including Virtual Goods (e.g., we might change some features of Virtual Goods for regulatory or legal reasons or to improve the game experience), and may require that you download and install software and updates to any software required to support the XWG Services, at any time without liability to you. You also understand and agree that any such changes or updates to the XWG Services might change the system specifications necessary to play our games, and in such a case, you, and not XWG Games, are responsible for purchasing any necessary additional software or hardware in order to access and play our games. You also understand and agree that we may use background patching to automatically update our games and software with or without notice to you.</span></p><p><span> </span></p><ol><li><span>LINKS</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>11.1. What about links in the XWG Services? Are those Safe? (Like Bard’s magical journeys, you might find something dangerous waiting for you on the other side. Proceed with caution….)</span></p><p><span>The XWG Services may contain links to websites operated by other parties. Again, we do not own or operate those other websites. We provide these links to you as a convenience, or other users might be posting these links as user-provided content. Use these links and the corresponding external websites at your own risk. We don’t control the linked sites, and we’re not responsible for the content available there. Such links don’t imply our endorsement of info or material on any other site, and we disclaim all liability with regard to your access to and use of such linked websites.</span></p><p><span> </span></p><ol><li><span>NOTICE AND PROCEDURE FOR CLAIMS OF COPYRIGHT INFRINGEMENT</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>12.1. What should I do if someone is infringing my copyrighted work in the XWG Services? (Send us a copyright take-down notice.)</span></p><p><span>XWG Games respects copyright law and expects its users to do the same. It is our policy to terminate accounts in appropriate circumstances of users who infringe or are believed to infringe the rights of copyright holders. XWG Games will respond expeditiously to claims of copyright infringement committed using the XWG Games website or other online network accessible through a mobile device or other type of device (the “Sites”) that are reported to XWG Games’ Designated Copyright Agent, identified in the sample notice below.</span></p><p><span> </span></p><p><span>If you’re a copyright owner, are authorized to act on behalf of one, or authorized to act under any exclusive right under copyright, please report alleged copyright infringements taking place on or through the Sites by submitting a notice that contains all of the following:</span></p><p><span> </span></p><p><span>Identify the copyrighted work that you claim has been infringed, or - if multiple copyrighted works are covered by this Notice - you may provide a representative list of the copyrighted works that you claim have been infringed.</span></p><p><span>Identify the material that you claim is infringing (or to be the subject of infringing activity) and that is to be removed or access to which is to be disabled, and information reasonably sufficient to permit us to locate the material, including at a minimum, if applicable, the URL of the link shown on the Site(s) where such material may be found.</span></p><p><span>Provide your mailing address, telephone number, and, if available, email address.</span></p><p><span>Include both of the following statements in the body of the Notice:</span></p><p><span>“I hereby state that I have a good faith belief that the disputed use of the copyrighted material is not authorized by the copyright owner, its agent, or the law (e.g., as a fair use).”</span></p><p><span>“I hereby state that the information in this Notice is accurate and[, under penalty of perjury,]* that I am the owner, or authorized to act on behalf of the owner, of the copyright or of an exclusive right under the copyright that is allegedly infringed.”</span></p><p><span>Provide your full legal name and your electronic or physical signature.</span></p><p><span>*</span><span> You only need to include this language if you live in the United States of America.</span></p><p><span> </span></p><p><span>Deliver this notice (“Notice”), with all items completed, to XWG Games’ Copyright Agent. You can send your Notice instead by email to: service@xwg.games. This email address is intended solely for the receipt of copyright take-down notices and not for general inquiries or requests of XWG Games. Attachments cannot be accepted at the email address for security reasons. Accordingly, any Notice submitted electronically with an attachment will not be received or processed.</span></p><p><span> </span></p><p><span>Please note that the Notices are legal notices and that XWG Games may provide copies of such notices to the participants in the dispute or to third parties, at its discretion or as required by law. Upon receipt of such a Notice, XWG Games will take whatever action, in its sole discretion, it deems appropriate, including removal of the challenged material from the Sites.</span></p><p><span> </span></p><ol><li><span>WARRANTY DISCLAIMER</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>13.1. Does XWG make any warranties about the XWG Services? (It depends where you are - prepare for some more lawyer shouting!)</span></p><p><span>You assume all responsibility for the installation and use of, and results obtained from the XWG Services (no matter where you are based).</span></p><p><span> </span></p><p><span>Also, if you are based in North, Central or South America:</span></p><p><span> </span></p><p><span>The XWG Services are provided to you on an “as is” and “as available” basis without warranties or representations of any kind, express or implied. You assume all responsibility for your use of the XWG Services. To the fullest extent permitted by applicable law, XWG Games disclaims all warranties, express or implied, which might apply to the XWG Services, including implied warranties of title, non-infringement, merchantability, fitness for a particular purpose, any warranties that may arise from course of dealing, course of performance or usage of trade, and any warranties as to the accuracy, reliability or quality of any content or info contained within the XWG Services.</span></p><p><span> </span></p><ol><li><span>INDEMNIFICATION</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>14.1. If someone sues XWG based on my use or misuse of the XWG Services, do I have to pay for XWG’s legal expenses? (Yes.)</span></p><p><span>To the extent permitted by law, except in cases involving our gross negligence or willful misconduct, you hereby agree to indemnify, defend and hold harmless XWG Games and its subsidiaries, affiliates, officers and directors from and against any and all claims, lawsuits, losses, liabilities and costs that arise or result from your misuse of the XWG Services, any violation by you of any of the provisions of these Terms (for example, if you use any hacks, cheats or bots with the XWG Services or you infringe our IP rights), or any infringement by you of any third party’s rights. XWG Games reserves the right, at its own expense and in its sole and absolute discretion, to assume the exclusive defense and control of any matter otherwise subject to indemnification by you, in which event you’ll cooperate with XWG Games in asserting any available defenses.</span></p><p><span> </span></p><p><span>For example, if you use the XWG Services as part of a business operation (something you’re not allowed to do) and we get sued because of something you do in breach of these Terms, you’ll have to defend us in court and pay for any damages we incur.</span></p><p><span> </span></p><ol><li><span>LIMITATION OF LIABILITY</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>15.1. Is there a limit on XWG’s potential liability under these Terms? (Yes.)</span></p><p><span>To the extent permitted by law, our total liability to you (whether for breach of this contract, negligence or for any other reason whatever) for any loss, harm or damage suffered by you in connection with your downloading, use and/or access of the XWG Services is limited to the total amounts paid by you to XWG during the six (6) months immediately prior to the time your cause of action first arose.</span></p><p><span> </span></p><p><span>We only make the XWG Services available for domestic and private use. We are not liable for business losses (such as any loss of profit, loss of business, business interruption, loss of goodwill or loss of business opportunity). We also won’t have responsibility for any damage which arises because you failed to install any update when it is made available by XWG Games or where you fail to maintain the minimum system specifications required. Separately, we are not responsible for: (i) any loss that was not foreseeable at the time you entered into these Terms; or (ii) any loss that we both knew might happen only because of your special circumstances existing at the time you entered into these Terms (including all indirect damages).</span></p><p><span> </span></p><p><span>Despite anything else we say in these Terms, WE DO NOT EXCLUDE OR LIMIT IN ANY WAY OUR LIABILITY TO YOU WHERE IT WOULD BE UNLAWFUL TO DO SO, including our liability for: (i) death or personal injury arising from our negligence; (ii) our fraud or fraudulent misrepresentation; (iii) willful or grossly negligent behavior; (iv) for damage arising from a negligent breach of an obligation that is essential for the performance of the contract by XWG Games (“Cardinal Duties”) to the extent that is typical and foreseeable; (v) for any guarantee given by us to you; or (vi) for any liability under a jurisdiction’s applicable product liability legislation.</span></p><p><span> </span></p><p><span>You may also have specific rights under local law in addition to those set out above.</span></p><p><span> </span></p><ol><li><span>GOVERNING LAW</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>16.1. What law applies to these Terms or if we get into a dispute? (That depends on where you live and what XWG Games entity provides you with XWG Services.)</span></p><p><span>Please review below to determine what law applies to your use of the XWG Services. Irrespective of this choice-of-law, you may have the benefit of other or additional mandatory rights or remedies provided by local law in addition to those set out in these Terms. Nothing in these Terms limits or affects those rights.</span></p><p><span> </span></p><p><span>If you live in North, Central or South America (excluding Brazil)</span></p><p><span> </span></p><p><span>These Terms and any action arising out of or in connection with these Terms will be governed by the Federal Arbitration Act with respect to Section 17 “Dispute Resolution,” and the laws of the State of California, without regard to its conflict of laws provisions. Except as otherwise expressly set out in Section 17 “Dispute Resolution,” the exclusive jurisdiction for all disputes that you and XWG Games are not required to arbitrate will be the state and federal courts located in the Los Angeles County, California, and you and XWG Games each waive any objection to jurisdiction and venue in such courts.</span></p><p><span> </span></p><p><span>If you live in South Korea</span></p><p><span> </span></p><p><span>These Terms and any action arising out of or in connection with these Terms shall be governed by the laws of Korea.</span></p><p><span> </span></p><p><span>If you live in Japan</span></p><p><span> </span></p><p><span>These Terms and any action arising out of or in connection with these Terms shall be governed by the laws of Japan.</span></p><p><span> </span></p><p><span>If you live in Singapore, Philippines, Thailand, Malaysia, Indonesia and Cambodia (“SEA”)</span></p><p><span> </span></p><p><span>These Terms and any action arising out of or in connection with these Terms shall be governed by the laws of Singapore.</span></p><p><span> </span></p><p><span>If you live in the European Economic Area, UK, Brazil or any country that isn’t listed in this Section</span></p><p><span> </span></p><p><span>These Terms and any action arising out of or in connection with these Terms shall be governed by, and will be construed under, the laws of Ireland, without regard to conflict of law principles.</span></p><p><span> </span></p><ol><li><span>DISPUTE RESOLUTION</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>17.1. I have an issue that I haven’t been able to sort out with XWG Games. What’s the path to resolving this dispute? (That depends on where you live)</span></p><p><span>If you live in:</span></p><p><span> </span></p><p><span>North, Central or South America (except for Brazil), you’ll be contracting and dealing with XWG Games Inc. and you need to read Part A (General Dispute Resolution Terms) and Part B of this Section;</span></p><p><span>South Korea, you’ll be contracting and dealing with XWG Game Limited and you need to read Part A (General Dispute Resolution Terms) and Part C of this Section;</span></p><p><span>Japan, you’ll be contracting and dealing with XWG Games, LLC and you need to read Part A (General Dispute Resolution Terms) and Part D of this Section;</span></p><p><span>SEA, you’ll be contracting and dealing with XWG Games Services PTE. LTD. and you need to read Part A (General Dispute Resolution Terms) and Part E of this Section; or</span></p><p><span>The European Economic Area, UK, Brazil or any other region/country that isn’t listed above, you’ll be contracting and dealing with XWG Games Limited and you need to read Part A (General Dispute Resolution Terms). If you are based in the EU, Part F of this Section will also apply.</span></p><p><span>Part A: General Dispute Resolution (no matter where you live)</span></p><p><span>17.2. If we have a dispute, can we 1 v 1 instead? (No, we should negotiate first.)</span></p><p><span>Disputes can be expensive and time consuming for both parties (justice doesn’t come on swift wings outside Valoran). In an effort to accelerate resolution and reduce the cost of any dispute or claim related to these Terms (“Claim”), you and XWG Games agree to first attempt to informally negotiate any Claim for at least thirty (30) days (except as set out in Section 17.4 below).</span></p><p><span> </span></p><p><span>17.3. How does negotiation get started? (One of us sends the other one a written notification describing the situation and relief sought.)</span></p><p><span>XWG Games will send its notice to the email address associated with your account. If you don’t have an account with XWG Games, we will send the notice to the email address which you used to write to us about the Claim. You must send your notice to the XWG Games entity that is responsible for providing the XWG Services to you. Please note that this informal resolution procedure does not suspend any statutory limitation periods applicable to the bringing of a Claim.</span></p><p><span> </span></p><p><span>17.4. What claims are we agreeing to submit to negotiation? (Depends on the type of dispute)</span></p><p><span>To the maximum extent permitted under applicable law and without limiting your statutory rights to initiate a court proceeding, you and XWG Games agree that the following Claims are not subject to the other provisions in this Part A concerning negotiations: (i) any Claims seeking to enforce or protect, or concerning the validity of, any of your or XWG Games’ intellectual property rights; (ii) any Claim related to, or arising from, allegations of theft, piracy, invasion of privacy or unauthorized use; and (iii) any Claim for equitable relief (such as an injunction). In addition, either party may assert an individual action in small claims court for Claims that are within the scope of such courts’ jurisdiction instead of litigation.</span></p><p><span> </span></p><p><span>Part B: Dispute Resolution for North, Central or South America (excluding Brazil)</span></p><p><span>17.5. What the heck is arbitration? (A private dispute resolution method. No courtrooms or juries.)</span></p><p><span>Arbitration is an alternative dispute resolution process in which the parties agree to have their disputes decided by a neutral third party and not by a sitting judge or jury. Arbitration allows parties to resolve their disputes privately and without the formality of going to court. Arbitration follows different procedural rules than a court would, and is subject to very limited review by courts.</span></p><p><span> </span></p><p><span>17.6. Will arbitration allow for the same type of relief as a court? (Yes.)</span></p><p><span>The arbitrator shall have the power to award any type of legal or equitable relief that would be available in a court of competent jurisdiction. The arbitrator’s decision (called an “Award”) will consist of a written statement stating the disposition of each claim and provide a concise written statement of the essential findings and conclusions on which the Award is based. The Award will be final and binding upon the parties, may be confirmed by a court of competent jurisdiction, and then enforced like any other court order or judgment.</span></p><p><span> </span></p><p><span>17.7. What claims are we agreeing to submit to arbitration? (Almost everything.)</span></p><p><span>Any dispute, claim or controversy arising out of or related to these Terms or the XWG Services shall be resolved exclusively by private, binding arbitration, rather than in court, except that qualifying small claims may be submitted in small claims court and either party may seek emergency, provisional relief before the appointment of an arbitrator as specified in Section 17.14, below. This means that, except for qualifying small claims actions and emergency situations covered by Section 17.14 below, you and XWG Games each waive the right to bring such claims to court, including the right to a jury trial.</span></p><p><span> </span></p><p><span>17.8. Can I bring a class or collective action claim? (No. Sorry for more lawyer-shouting, but this is very important.)</span></p><p><span>You and XWG Games agree that each of us may bring claims against the other only on an individual basis and not as a plaintiff or class member in any purported class or representative action or proceeding. Unless both you and XWG Games agree otherwise, the arbitrator may not consolidate or join more than one person’s or party’s claims, and may not otherwise preside over any form of a consolidated, representative, or class proceeding. Also, the arbitrator may award relief (including monetary, injunctive, and declaratory relief) only in favor of the individual party seeking relief and only to the extent necessary to provide relief necessitated by that party’s individual claim(s).</span></p><p><span> </span></p><p><span>17.9. What issues will the arbitrator decide? (Pretty much everything.)</span></p><p><span>The arbitrator shall decide all issues in dispute between you and XWG Games.</span></p><p><span> </span></p><p><span>17.10. Who will administer the arbitration? (JAMS, using its “Comprehensive Arbitration Rules.”)</span></p><p><span>The arbitration shall be administered by JAMS pursuant to its Comprehensive Arbitration Rules and Procedures (“JAMS Rules”). A sole arbitrator shall be selected pursuant to these rules. Judgment on the Award may be entered in any court having jurisdiction.</span></p><p><span> </span></p><p><span>17.11. How does arbitration get started? (One of us sends the other one and JAMS a written notification describing the situation and relief sought.)</span></p><p><span>Either party may commence an arbitration proceeding. The party commencing the arbitration is called the “claimant.” A party who wishes to start arbitration must submit a written Demand for Arbitration to JAMS and give notice to the other party. JAMS provides a form Demand for Arbitration on its website.</span></p><p><span> </span></p><p><span>17.12. Who’s gonna pay for the arbitration? (We pay filing fees for lesser claims, but you have to pay filing fees for larger claims. We won’t seek attorney fees for arbitration from you unless your claim is found to be frivolous.)</span></p><p><span>Payment of all filing, administration and arbitrator fees will be governed by the JAMS Rules. We’ll pay for all filing, administration and arbitrator fees and expenses if your dispute is for less than $10,000, unless the arbitrator finds your dispute frivolous. If we prevail in arbitration we’ll pay all of our attorneys’ fees and costs and won’t seek to recover them from you. If you prevail in arbitration you will be entitled to an award of attorneys’ fees and expenses to the extent provided under applicable law.</span></p><p><span> </span></p><p><span>17.13. Where and how will the arbitration take place? (Over the phone, in writing, or in your hometown—your choice.)</span></p><p><span>You may choose to have the arbitration conducted by telephone, based on written submissions, in person in the county where you live, or at another mutually agreed location.</span></p><p><span> </span></p><p><span>17.14. What about intellectual property infringement? (Either party may go to court for the limited purpose of seeking a “provisional” remedy.)</span></p><p><span>Either party may seek emergency provisional remedies, including injunctive or similar relief, pursuant to the JAMS rules or from a court of competent jurisdiction located in Los Angeles County, California, where necessary to protect that party’s rights and interests for the infringement or misappropriation of intellectual property rights pending the appointment of an arbitrator.</span></p><p><span> </span></p><p><span>17.15. Can either of us tell our friends and Twitter followers about the arbitration? (Nope.)</span></p><p><span>You and XWG Games agree that any dispute, claim or controversy that has been submitted to arbitration, and all related proceedings including any settlement agreement, shall be kept confidential. However, the prevailing party in any arbitration may file the arbitration Award with any court of competent jurisdiction in order to have that Award confirmed in a court order or judgment.</span></p><p><span> </span></p><p><span>17.16. What if part of this agreement to arbitrate isn’t enforceable? (The rest stays—we keep as much of it as can be enforced under the law.)</span></p><p><span>You and XWG Games agree that if any part of this arbitration agreement is declared unenforceable, that part shall be severed and the remainder of this arbitration agreement shall be given full force and effect. However, if Section 17.8, above (entitled, “Can I bring a class action claim?”), or any part of it is found to be unenforceable, then this entire arbitration agreement (i.e., all of Part A of Section 17) shall be severed from these Terms and all claims between you and XWG Games shall be exclusively decided by a court located in Los Angeles County, California as set out in the relevant part of Section 16 above.</span></p><p><span> </span></p><p><span>Part C: Dispute Resolution for South Korea</span></p><p><span>Any dispute arising under these Terms or XWG Services will be brought in the court having jurisdiction in accordance with the Code of Korean Civil Procedure.</span></p><p><span> </span></p><p><span>Part D: Dispute Resolution for Japan</span></p><p><span>The Tokyo District Court shall have the exclusive jurisdiction in the first instance over any dispute between XWG Games and you arising out of, or in connection with, these Terms or any XWG Services.</span></p><p><span> </span></p><p><span>Part E: Dispute Resolution for SEA</span></p><p><span>Any dispute, controversy, claim or difference of any kind whatsoever arising out of or in connection with these Terms or XWG Services shall be referred to and finally resolved by arbitration administered by the Singapore International Arbitration Centre (“SIAC”) in accordance with the Arbitration Rules of the Singapore International Arbitration Centre (“SIAC Rules”) for the time being in force, which rules are deemed to be incorporated by reference in this Section. The seat of the arbitration shall be Singapore. The Tribunal shall consist of three (3) arbitrators and the language of the arbitration shall be English.</span></p><p><span> </span></p><p><span>Part F: Dispute Resolution for EEA Residents</span></p><p><span>17.17. Do I have other dispute resolution options?</span></p><p><span>If you live in the EEA, you may refer the dispute to the European Commission’s Online Dispute Resolution Platform .</span></p><p><span> </span></p><p><span>Within a year after you submit your complaint to us, you may also try to resolve your dispute with XWG Games through a mediation procedure. This does not limit your statutory rights to initiate a court proceeding.</span></p><p><span> </span></p><ol><li><span>ADDITIONAL TERMS APPLICABLE TO XWG SERVICES</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>18.1. General Terms</span></p><p><span>You may access XWG Services we make available from certain authorized third party stores or platforms (an authorized third party provider of any store, game system, console or platform each a “Third Party Platform”), only if you agree that:</span></p><p><span> </span></p><p><span>These Terms are an agreement between us and you, and not between you and the Third Party Platform. As between XWG Games and the Third Party Platform, XWG Games is solely responsible for any XWG Services.</span></p><p><span>The Third Party Platform has no obligation to provide any maintenance and support services for the XWG Services.</span></p><p><span>The Third Party Platform is not responsible for addressing any claims you have relating to the XWG Services or your possession and use of the XWG Service.</span></p><p><span>If a third party claims any of the XWG Services infringes another party&#39;s intellectual property rights, as between the Third Party Platform and XWG Games, the Third Party Platform will not be responsible for the investigation, defense, settlement and discharge of any such claim.</span></p><p><span>The Third Party Platform and its subsidiaries are third-party beneficiaries of these Terms as they relate to your license to the XWG Services. Upon your acceptance of these Terms, the Third Party Platform will have the right (and will be deemed to have accepted the right) to enforce this Section 18 and Section as related to your license of the XWG Services against you as a third-party beneficiary.</span></p><p><span>You must also comply with all applicable third-party terms of service and licenses when accessing or using the Third Party Platform including any additional terms that apply when you download, stream, access or use any XWG game, Virtual Content or other XWG Services.</span></p><p><span> </span></p><ol><li><span>MISCELLANEOUS</span></li></ol><p>&nbsp;</p><p>&nbsp;</p><p><span>19.1. What can I do if I have questions about the XWG Services? (Until the day we can establish a Yordle call center, you can email us.)</span></p><p><span>If you have any questions concerning the XWG Services, or if you would like to contact us for any other reason, please contact XWG Games support at service@xwg.games.</span></p><p><span> </span></p><p><span>19.2. Can either party assign these Terms? (No. Just us.)</span></p><p><span>XWG Games may assign its rights under these Terms, in whole or in part, to any person or entity at any time with or without your consent. You may not assign your rights under these Terms without XWG Games’ prior written consent, and any unauthorized assignment by you shall be null and void.</span></p><p><span> </span></p><p><span>19.3. Is this our entire agreement? (Yes, including those other important policies we talked about earlier.)</span></p><p><span>These Terms represent the complete agreement between you and XWG Games concerning the XWG Services, and supersede any prior or contemporaneous agreements between you and XWG Games. These Terms shall coexist with, and shall not supersede any other XWG Games policies referenced in these Terms. You and XWG Games agree that we each have not relied upon, and have no remedies in respect of, any terms, conditions, representations, warranties or similar that are not expressly set out in these Terms.</span></p><p><span> </span></p><p><span>19.4. What happens if a natural disaster interferes with the Game? (XWG isn’t liable.)</span></p><p><span>XWG Games shall not be liable for any delay or failure to perform, including any failure to perform under these Terms due to unforeseen circumstances or cause beyond XWG Games’ control such as: (a) hacking, cyber-attacks, data corruption/loss (where we have taken the steps that would reasonably be taken by companies like us to avoid this event occurring); or (b) acts of god, war, terrorism, bomb-threats, XWGs, embargoes, acts of civil or military authorities, fire, floods, accidents, strikes, or shortages of transportation facilities, fuel, energy, labor or materials.</span></p><p><span> </span></p><p><span>19.5. Do these Terms mean we’re partners? (Not in a legal sense, no.)</span></p><p><span>You agree that no joint venture, partnership, employment, or agency relationship exists between you and XWG Games as a result of these Terms or your use of the XWG Services.</span></p><p><span> </span></p><p><span>19.6. If I breach these Terms and XWG does nothing for a long time, does that mean I’m off the hook? (No. We reserve all of our rights.)</span></p><p><span>XWG Games’ failure to enforce any provision of these Terms shall in no way be construed to be a present or future waiver of such provision, nor in any way affect the right of any party to enforce each and every such provision after that. Any waiver by XWG Games of any provision, condition or requirement of these Terms shall not constitute a waiver of any future obligation to comply with such provision, condition or requirement.</span></p><p><span> </span></p><p><span>19.7. What remedies are available to XWG Games if I breach these Terms?</span></p><p><span>You agree that XWG Games would suffer irreparable harm if a breach of certain of these Terms (such as Section 3.2) was not specifically enforced and that damages would not be an adequate remedy for XWG Games as a result. We may rely upon this Section to ask a court for injunctive relief or specific performance.</span></p><p><span> </span></p><p><span>19.8. If I need to send a legal notice to XWG, where do I send it? (We hope you never need to send us a legal notice, but if you do….)</span></p><p><span>Except as otherwise expressly provided in these Terms, all notices given by you or required under these Terms shall be in writing and addressed to the XWG Games entity that provides you with the XWG Services at issue. See Section 19 for the address of the relevant XWG Games entity.</span></p><p><span> </span></p><p><span>19.9. Can I play the Game if the U.S. government thinks I might be a terrorist or I live in an embargoed country? (No.)</span></p><p><span>Much of the XWG Services are developed in the U.S. so you cannot use them if: (1) the Office of Foreign Assets Control of the United States Treasury Department lists you as a specially designated national and/or blocked person; (2) the Bureau of Industry and Security of the United States Department of Commerce lists you on its denied persons list or lists of parties of concern; or (3) you’re on any similar list promulgated by an official agency or department of the United States government. You warrant and represent that you’re not located in, under the control of, or a national or resident of any embargoed country.</span></p><p><span> </span></p><p><span>19.10. If part of these Terms is invalidated, what happens to the rest? (Like Zac, these Terms might lose a part or two, but what’s left lives on.)</span></p><p><span>Except as otherwise provided in these Terms, if any provision of these Terms is held to be invalid or unenforceable for any reason, such provision shall be considered severed from these Terms and the remainder of these Terms shall continue in full force and effect.</span></p><p><span> </span></p><p><span>19.11. Are these silly headings legally binding? (No. These headings are just our lawyers’ way of trying to be engaging and funny. Other lawyers find these headings to be appropriately engaging and funny.)</span></p><p><span>The headings and parentheticals in these Terms are provided for informational and entertainment purposes only. They have no legal effect whatsoever.</span></p><p><span> </span></p><p><span>19.12. How long does this agreement last? (For as long as you use the XWG Services or until your account is terminated. Some provisions have been chronoshifted, though, and last forever.)</span></p><p><span>These Terms begins on the date you first accept them and last for as long as you use or maintain an account on the XWG Services. However, Sections 2.3, 3.2, 4.3, 4.4, 4.5, 5.1, 6, 8, and 13-19 inclusive, shall survive the termination of these Terms.</span></p><p><span> </span></p><p><span>19.13. Where we say “including” in these Terms, is that language limiting? (No.)</span></p><p><span>Whenever we use “including” in these Terms, we mean “including without limitation.”</span></p><p><span> </span></p><p><span>YOU ACKNOWLEDGE AND AGREE THAT YOU HAVE READ AND UNDERSTAND THESE TERMS, AND THAT BY SELECTING THE “ACCEPT” BUTTON BELOW OR OTHERWISE USING OR ACCESSING THE XWG SERVICES, YOU ARE AGREEING TO BE BOUND BY THE TERMS AND CONDITIONS SET OUT IN THESE TERMS.</span></p><p><span> </span></p><p><span> </span></p><p><span>XWG Games</span></p><p><span>PRESSSECURITYLEGALLEADERSHIPCANDIDATE PRIVACYTERMS OF SERVICEPRIVACY NOTICEPLAYER SUPPORTE-VERIFYACCESSIBILITY</span></p><p><span>Follow us on Facebook</span></p><p><span>Follow us on Twitter</span></p><p><span>Share this on LinkedIn</span></p><p><span>Watch on YouTube</span></p><p><span>Cookie Preferences© 2022 XWG Games, Inc. All Rights Reserved.</span></p><p><span>TO THE SURFACE</span></p></div></div>
+</body>
+</html>

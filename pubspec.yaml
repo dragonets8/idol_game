@@ -1,0 +1,90 @@
+name: idol_game
+description: A new Flutter project.
+
+version: 1.0.0+202207251
+publish_to: none
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+ 
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  
+  dio: ^4.0.0
+  mime: ^1.0.0
+  share: ^2.0.4
+  logger: ^1.0.0
+  encrypt: ^5.0.1
+  crypton: ^2.0.2
+  sqflite: ^2.0.2
+  provider: ^4.3.3
+  flustars: ^2.0.1
+  frefresh: ^1.1.0
+  timelines: ^0.1.0
+  flip_card: ^0.5.0
+  intl_utils: ^2.1.0
+  qr_flutter: ^4.0.0
+  local_auth: ^1.1.11
+  localstorage: ^4.0.0
+  empty_widget: ^0.0.5
+  flutter_icons: ^1.1.0
+  google_nav_bar: ^5.0.3
+  cupertino_icons: ^1.0.2
+  json_annotation: ^4.0.1
+  qr_code_scanner: ^1.0.1
+  cookie_jar: ^3.0.0
+  dio_cookie_manager: ^2.0.0
+  device_info_plus: ^3.2.1
+  adaptive_dialog: ^1.1.0
+  flutter_floating: 0.1.0
+  webview_flutter: ^2.0.10
+  loading_indicator: ^3.0.1
+  flutter_app_update: ^1.0.4
+  flutter_easyloading: 3.0.3
+  flutter_screen_lock: 4.0.4+2
+  conduit_password_hash: ^3.1.0
+  expandable_page_view: 1.0.5
+  flutter_inappwebview: ^5.3.2
+  cached_network_image: ^3.0.0
+  flutter_custom_tab_bar: 1.0.2
+  flutter_advanced_switch: ^2.0.2+1
+  sticky_and_expandable_list: ^1.0.1
+  country_calling_code_picker: ^2.0.0
+
+  web3dart: 2.1.4
+  secp256k1: ^0.3.0
+  eth_sig_util: ^0.0.9
+  ed25519_hd_key: ^2.2.0
+  flutter_bitcoin: ^1.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/common/
+    - assets/images/guide/
+    - assets/images/wallet/
+    - assets/images/dapp/
+    - assets/images/my/
+    - assets/html/
+    - assets/js/
+
+  fonts:
+    - family: D-DIN
+      fonts:
+        - asset: assets/fonts/D-DIN.ttf
+          weight: 400
+    - family: D-DIN-Bold
+      fonts:
+        - asset: assets/fonts/D-DIN-Bold.ttf
+          weight: 400
+
+flutter_intl:
+    enabled: true
