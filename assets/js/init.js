@@ -78,3 +78,8 @@ window.web3.eth.getCoinbase = function(cb) {
 }
 window.web3.eth.defaultAccount = addressHex
 window.ethereum = web3.currentProvider
+
+window.showWallet = function() {
+  console.log("showWallet ...");
+  flutter_inappwebview.callHandler('showWallet');
+}

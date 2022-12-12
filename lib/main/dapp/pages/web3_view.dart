@@ -235,7 +235,7 @@ class _Web3ViewState extends State<Web3View> {
             initialUrlRequest: URLRequest(url: Uri.parse(widget.initialUrl)),
             initialOptions: InAppWebViewGroupOptions(
                 crossPlatform: InAppWebViewOptions(
-                    javaScriptEnabled: true, cacheEnabled: false),
+                    javaScriptEnabled: true, cacheEnabled: true),
                 android:
                     AndroidInAppWebViewOptions(useHybridComposition: true)),
             initialUserScripts: Platform.isIOS
@@ -322,6 +322,12 @@ class _Web3ViewState extends State<Web3View> {
         callback: (args) {
           print("ethCall\n$args");
           ethCall(args);
+        });
+    _web3Controller.addJavaScriptHandler(
+        handlerName: "showWallet",
+        callback: (args) {
+          print("showWallet\n$args");
+          appLockJudge();
         });
   }
 
