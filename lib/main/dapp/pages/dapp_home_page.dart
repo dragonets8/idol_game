@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:idol_game/database/chain_database.dart';
 import 'package:idol_game/database/wallet_database.dart';
 import 'package:idol_game/generated/l10n.dart';
 import 'package:idol_game/main.dart';
@@ -67,18 +65,6 @@ class DappHomeState extends State<DappHomePage>
     getAdds();
     getDapps();
     addBannerTimer();
-    ChainDB().queryAllChain((chainData) {
-      Map<String, dynamic> chainMap = {"chains": chainData};
-      ChainEntity chainEntity = ChainEntity.fromJson(chainMap);
-      List<Chain> chains = chainEntity.chains;
-      List<String> tabs = tabTitles;
-      for (var i = 0; i < chains.length; i++) {
-        tabs.add(chains[i].name);
-      }
-      setState(() {
-        tabTitles = tabs;
-      });
-    });
   }
 
   @override

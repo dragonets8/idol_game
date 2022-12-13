@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:idol_game/database/chain_database.dart';
 import 'package:idol_game/generated/l10n.dart';
 import 'package:idol_game/main/wallet/models/chain_entity.dart';
 import 'package:idol_game/main/wallet/models/token_entity.dart';
@@ -13,6 +12,7 @@ import 'package:idol_game/styles/screen.dart';
 import 'package:idol_game/styles/styles.dart';
 import 'package:idol_game/utils/load_image.dart';
 import 'package:idol_game/utils/navigator_utils.dart';
+import 'package:idol_game/wallet_hd/config.dart';
 import 'package:idol_game/wallet_hd/token_utils/string_util.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
@@ -41,11 +41,12 @@ class TransferDetailState extends State<TransferDetailPage> {
   }
 
   openExplore() async {
-    Chain chain = await ChainDB().queryChain(widget.tokenItem.chain);
     String exploreUrl =
-        chain.blockBrowserUrl + "/tx/${widget.transaction.hash}";
-    NavigatorUtils.pushTransparentPage(context,
-        CommonWebView(title: chain.blockBrowserUrl, initialUrl: exploreUrl));
+        ChainConfig.bep20.explorer + "/tx/${widget.transaction.hash}";
+    NavigatorUtils.pushTransparentPage(
+        context,
+        CommonWebView(
+            title: ChainConfig.bep20.explorer, initialUrl: exploreUrl));
   }
 
   String transactionTitle() {
@@ -235,11 +236,10 @@ class TransferDetailState extends State<TransferDetailPage> {
   }
 
   getGas() async {
-    Chain chain = await ChainDB().queryChain(widget.tokenItem.chain);
     double gasPrice = int.parse(widget.transaction.gasPrice) / pow(10, 18);
     double gasValue = gasPrice * int.parse(widget.transaction.gasUsed);
     setState(() {
-      gas = "$gasValue ${chain.symbol}";
+      gas = "$gasValue ${ChainConfig.bep20.symbol}";
     });
   }
 

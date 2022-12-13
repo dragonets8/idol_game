@@ -1,4 +1,3 @@
-import 'package:idol_game/database/chain_database.dart';
 import 'package:idol_game/generated/l10n.dart';
 import 'package:idol_game/main/wallet/models/chain_entity.dart';
 import 'package:idol_game/main/wallet/models/token_entity.dart';
@@ -110,13 +109,12 @@ class TokenDetailPageState extends State<TokenDetailPage> {
   }
 
   openOption(int optionIndex) async {
-    Chain chain = await ChainDB().queryChain(widget.tokenItem.chain);
     String exploreUrl =
-        chain.blockBrowserUrl + "/address/${widget.tokenItem.address}";
+        ChainConfig.bep20.explorer + "/address/${widget.tokenItem.address}";
     List optionPages = [
       TokenTransferPage(tokenItem: widget.tokenItem),
       TokenReceivePage(tokenItem: widget.tokenItem),
-      CommonWebView(title: chain.blockBrowserUrl, initialUrl: exploreUrl)
+      CommonWebView(title: ChainConfig.bep20.explorer, initialUrl: exploreUrl)
     ];
     NavigatorUtils.pushTransparentPage(context, optionPages[optionIndex]);
   }

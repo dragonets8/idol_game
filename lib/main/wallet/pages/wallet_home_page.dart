@@ -1,19 +1,16 @@
 import 'dart:math';
-
 import 'package:idol_game/abi/token.g.dart';
-import 'package:idol_game/database/chain_database.dart';
 import 'package:idol_game/database/token_database.dart';
 import 'package:idol_game/database/wallet_database.dart';
 import 'package:idol_game/generated/l10n.dart';
 import 'package:idol_game/main/guide/models/guide_utils.dart';
 import 'package:idol_game/main/guide/pages/wallet_guide_page.dart';
 import 'package:idol_game/main/my/pages/my_page.dart';
-import 'package:idol_game/main/wallet/models/chain_entity.dart';
+import 'package:idol_game/main/wallet/models/token_config.dart';
 import 'package:idol_game/main/wallet/models/token_entity.dart';
 import 'package:idol_game/main/wallet/pages/lucid_list_page.dart';
 import 'package:idol_game/main/wallet/pages/message_page.dart';
 import 'package:idol_game/main/wallet/pages/nft_list_page.dart';
-import 'package:idol_game/main/wallet/pages/token_add_page.dart';
 import 'package:idol_game/main/wallet/pages/token_detail_page.dart';
 import 'package:idol_game/main/wallet/pages/token_select_page.dart';
 import 'package:idol_game/main/wallet/pages/wallet_list_page.dart';
@@ -29,7 +26,6 @@ import 'package:idol_game/utils/navigator_utils.dart';
 import 'package:idol_game/wallet_hd/config.dart';
 import 'package:idol_game/wallet_hd/token_utils/string_util.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:idol_game/main/wallet/widgets/wallet_tool_panel.dart';
 import 'package:idol_game/main/widgets/custom_widgets.dart';
 import 'package:idol_game/styles/colors.dart';
 import 'package:idol_game/main/wallet/widgets/token_cell.dart';
@@ -65,7 +61,7 @@ class WalletHomeState extends State<WalletHomePage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      refreshChains();
+      refreshTokens();
     });
     bus.on("switch_wallet", (args) {
       updateMyTokens();
@@ -82,41 +78,18 @@ class WalletHomeState extends State<WalletHomePage>
     controller.finishRefresh();
   }
 
-  refreshChains() async {
-    DioManager().request<ChainEntity>(Apis.queryChains, params: {},
-        success: (chainEntity) {
-      List<Chain> chains = chainEntity.chains;
-      for (var i = 0; i < chains.length; i++) {
-        ChainDB().updateChain(chains[i], isLast: i == chains.length - 1,
-            complete: () {
-          bus.emit("refresh_chains");
-          refreshTokens();
-        });
-      }
-    }, error: (error) {
-      print(error.message);
-    });
-  }
-
   refreshTokens() {
     WalletDB().queryWallet("active = 1", (walletData) async {
       String ethAddress = walletData.first["smart"];
       smartAddress = ethAddress;
-      DioManager().request<TokenEntityList>(Apis.queryTokens, params: {},
-          success: (tokenEntityList) {
-        print(tokenEntityList.toJson());
-        List<TokenEntity> tokens = tokenEntityList.list;
-        for (var i = 0; i < tokens.length; i++) {
-          Map<String, dynamic> tokenMap = tokens[i].toJson();
-          TokenDB().refeshToken(walletData.first, tokenMap,
-              isLast: i == tokens.length - 1, complete: () {
-            updateMyTokens();
-            EasyLoading.dismiss();
-          });
-        }
-      }, error: (error) {
-        print(error.message);
-      });
+      for (var i = 0; i < tokenConfig.length; i++) {
+        Map<String, dynamic> tokenMap = tokenConfig[i].toJson();
+        TokenDB().refeshToken(walletData.first, tokenMap,
+            isLast: i == tokenConfig.length - 1, complete: () {
+          updateMyTokens();
+          EasyLoading.dismiss();
+        });
+      }
     });
   }
 
@@ -144,10 +117,8 @@ class WalletHomeState extends State<WalletHomePage>
   getTokenBalance(String address) async {
     valuableTokens.clear();
     for (TokenEntity tokenItem in tokenList) {
-      Chain chain = await ChainDB().queryChain(tokenItem.chain);
-      print(chain.rpc);
       if (tokenItem.contract == "") {
-        final client = Web3Client(chain.rpc, Client());
+        final client = Web3Client(ChainConfig.bep20.rpc, Client());
         client.getBalance(EthereumAddress.fromHex(address)).then((value) {
           BigInt balance = value.getValueInUnitBI(EtherUnit.wei);
           double tokenBalance =
@@ -158,11 +129,11 @@ class WalletHomeState extends State<WalletHomePage>
         });
         await client.dispose();
       } else {
-        final client = Web3Client(chain.rpc, Client());
+        final client = Web3Client(ChainConfig.bep20.rpc, Client());
         final tokenContract = TokenContract(
             address: EthereumAddress.fromHex(tokenItem.contract),
             client: client,
-            chainId: int.parse(chain.chainId));
+            chainId: ChainConfig.bep20.chainId);
         tokenContract
             .getBalance(EthereumAddress.fromHex(address))
             .then((balance) {
@@ -300,35 +271,12 @@ class WalletHomeState extends State<WalletHomePage>
         context, TokenDetailPage(tokenItem: tokenItem));
   }
 
-  addToken() {
-    NavigatorUtils.pushTransparentPage(context, TokenAddPage());
-  }
-
   openWalletSwitch() {
     WalletDB().queryWallet("id > 0", (queryData) {
       WalletSwitch.sheet(context, queryData, () {
         manageWallet();
       }, () {
         addWallet();
-      });
-    });
-  }
-
-  filterTokens(int filterIndex) {
-    ChainDB().queryAllChain((chainData) {
-      Map<String, dynamic> chainMap = {"chains": chainData};
-      ChainEntity chainEntity = ChainEntity.fromJson(chainMap);
-      String filter =
-          filterIndex == 0 ? "" : (chainEntity.chains)[filterIndex - 1].type;
-      List<TokenEntity> filterTokens = selectTokens.where((token) {
-        if (filter == "") {
-          return true;
-        } else {
-          return token.chain == filter;
-        }
-      }).toList();
-      setState(() {
-        tokenList = filterTokens;
       });
     });
   }
@@ -394,20 +342,6 @@ class WalletHomeState extends State<WalletHomePage>
           ));
     } else if (itemIndex == 1) {
       return Gaps.vGap10;
-      return Container(
-          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: WalletToolPanel(
-            filterIndex: currentFilter,
-            filterClick: (filterIndex) {
-              setState(() {
-                currentFilter = filterIndex;
-              });
-              filterTokens(filterIndex);
-            },
-            addClick: () {
-              addToken();
-            },
-          ));
     } else {
       return Container(
           padding: EdgeInsets.fromLTRB(20, 0, 20, 0),

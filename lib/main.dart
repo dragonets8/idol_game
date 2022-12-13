@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:idol_game/database/chain_database.dart';
 import 'package:idol_game/database/token_database.dart';
 import 'package:idol_game/database/wallet_database.dart';
 import 'package:idol_game/provider/currency_provider.dart';
@@ -25,7 +24,6 @@ void main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
   await StorageService.init();
   WalletDB().connectDB();
-  ChainDB().connectDB();
   TokenDB().connectDB();
   DappDB().connectDB();
   configStatusBar();

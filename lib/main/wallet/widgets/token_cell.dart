@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:idol_game/database/chain_database.dart';
 import 'package:idol_game/main/wallet/models/chain_entity.dart';
 import 'package:idol_game/provider/currency_provider.dart';
 import 'package:idol_game/styles/colors.dart';
@@ -30,7 +29,6 @@ class TokenCellState extends State<TokenCell> {
 
   getChainImage() async {
     if (widget.tokenItem.contract != "") {
-      Chain chain = await ChainDB().queryChain(widget.tokenItem.chain);
       setState(() {
         chainImage = ClipRRect(
             borderRadius: BorderRadius.all(
@@ -38,7 +36,7 @@ class TokenCellState extends State<TokenCell> {
             ),
             child: CachedNetworkImage(
               width: 14,
-              imageUrl: chain.image,
+              imageUrl: "http://45.112.206.236:9810/icon/token/bnb.png",
               color: Colours.bg_dark,
               colorBlendMode: BlendMode.color,
             ));

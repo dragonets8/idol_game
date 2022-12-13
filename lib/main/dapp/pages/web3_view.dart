@@ -83,9 +83,11 @@ class _Web3ViewState extends State<Web3View> {
             child: LoadAssetImage('common/float_xwg', width: 50),
             onPressed: () => {appLockJudge()}),
         slideType: FloatingSlideType.onRightAndTop,
-        top: 30,
+        top: 80,
+        right: 20,
         isShowLog: false,
-        moveOpacity: 0.7,
+        moveOpacity: 0.5,
+        isPosCache: true,
         slideTopHeight: 30);
     xwgFloating.open();
   }
@@ -235,7 +237,9 @@ class _Web3ViewState extends State<Web3View> {
             initialUrlRequest: URLRequest(url: Uri.parse(widget.initialUrl)),
             initialOptions: InAppWebViewGroupOptions(
                 crossPlatform: InAppWebViewOptions(
-                    javaScriptEnabled: true, cacheEnabled: true),
+                    javaScriptEnabled: true,
+                    cacheEnabled: true,
+                    supportZoom: false),
                 android:
                     AndroidInAppWebViewOptions(useHybridComposition: true)),
             initialUserScripts: Platform.isIOS

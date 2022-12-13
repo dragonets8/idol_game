@@ -1,3 +1,5 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:idol_game/main/guide/pages/wallet_guide_page.dart';
 import 'package:idol_game/main/widgets/alert_sheet.dart';
 import 'package:idol_game/main/widgets/halfwidth_container.dart';
 import 'package:idol_game/database/wallet_database.dart';
@@ -66,40 +68,42 @@ class WalletManageState extends State<WalletManagePage> {
   }
 
   deleteWallet() {
-    WalletDB().queryWallet("id > 0", (queryData) {
-      if (queryData.length > 1) {
-        AlertSheet.show(context,
-            title: widget.wallet["type"] == 0
-                ? "${S.of(context).logout_title} ${walletName.replaceAll("&&", "")} ?"
-                : "${S.of(context).delete} $walletName?",
-            content: S.of(context).wallet_delete_tips,
-            actionTitle: widget.wallet["type"] == 0
-                ? S.of(context).logout_title
-                : S.of(context).delete,
-            cancelTitle: S.of(context).cancel,
-            actionColor: Colors.white, actionHandler: () {
-          if (widget.wallet["active"] == 1) {
-            WalletDB().deleteWallet(widget.wallet["id"], () {
-              WalletDB().queryWallet("id > 0", (queryData) {
-                WalletDB().activeWallet(queryData[0]["id"]);
-                bus.emit("switch_wallet");
-                bus.emit("refresh_wallet_list");
-                bus.emit("refreshActive");
-                bus.emit("switchWeb3Wallet");
-                Navigator.of(context).pop();
-              });
-            });
-          } else {
-            WalletDB().deleteWallet(widget.wallet["id"], () {
+    AlertSheet.show(context,
+        title: widget.wallet["type"] == 0
+            ? "${S.of(context).logout_title} ${walletName.replaceAll("&&", "")} ?"
+            : "${S.of(context).delete} $walletName?",
+        content: S.of(context).wallet_delete_tips,
+        actionTitle: widget.wallet["type"] == 0
+            ? S.of(context).logout_title
+            : S.of(context).delete,
+        cancelTitle: S.of(context).cancel,
+        actionColor: Colors.white, actionHandler: () {
+      if (widget.wallet["active"] == 1) {
+        WalletDB().deleteWallet(widget.wallet["id"], () {
+          WalletDB().queryWallet("id > 0", (queryData) {
+            if (queryData.length > 0) {
+              WalletDB().activeWallet(queryData[0]["id"]);
               bus.emit("switch_wallet");
               bus.emit("refresh_wallet_list");
-              bus.emit("switchWeb3Wallet");
+              bus.emit("refreshActive");
               Navigator.of(context).pop();
-            });
-          }
+            } else {
+              Navigator.of(context).popUntil((route) => route.isFirst);
+              Navigator.of(context, rootNavigator: false)
+                  .push(CupertinoPageRoute(
+                      builder: (_) {
+                        return WalletGuidePage(isRoot: true);
+                      },
+                      fullscreenDialog: true));
+            }
+          });
         });
       } else {
-        EasyLoading.showToast("This is your only wallet!");
+        WalletDB().deleteWallet(widget.wallet["id"], () {
+          bus.emit("switch_wallet");
+          bus.emit("refresh_wallet_list");
+          Navigator.of(context).pop();
+        });
       }
     });
   }

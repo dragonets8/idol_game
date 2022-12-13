@@ -56,12 +56,6 @@ class WalletToolBar extends StatelessWidget {
               CupertinoButton(
                   padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                   minSize: 10,
-                  child: LoadAssetImage('wallet/nft', width: 20),
-                  onPressed: () => {nftClick()}),
-              Gaps.hGap5,
-              CupertinoButton(
-                  padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                  minSize: 10,
                   child: LoadAssetImage('wallet/item_my', width: 22),
                   onPressed: () => {myClick()}),
             ],
