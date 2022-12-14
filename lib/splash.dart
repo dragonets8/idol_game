@@ -48,7 +48,7 @@ class SplashPageState extends State<SplashPage> {
                   address:
                       queryData.length == 0 ? "" : queryData.first["smart"],
                   smartChain: ChainConfig.bep20,
-                  isFullscreen: false)),
+                  isIdolGame: true)),
           (route) => route == null);
     });
   }

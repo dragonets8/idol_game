@@ -7,7 +7,9 @@ import 'package:idol_game/main/dapp/models/dapp_transaction.dart';
 import 'package:idol_game/main/dapp/models/web3_utils.dart';
 import 'package:idol_game/main/guide/pages/wallet_guide_page.dart';
 import 'package:idol_game/main/wallet/pages/wallet_home_page.dart';
+import 'package:idol_game/main/widgets/common_webview.dart';
 import 'package:idol_game/main/widgets/dapp_sheet.dart';
+import 'package:idol_game/main/widgets/halfwidth_container.dart';
 import 'package:idol_game/services/storage_service.dart';
 import 'package:idol_game/splash.dart';
 import 'package:idol_game/utils/event_bus.dart';
@@ -33,14 +35,14 @@ class Web3View extends StatefulWidget {
   final initialUrl;
   final address;
   final smartChain;
-  final isFullscreen;
+  final isIdolGame;
 
   Web3View(
       {@required this.dapp,
       @required this.initialUrl,
       @required this.address,
       @required this.smartChain,
-      @required this.isFullscreen});
+      @required this.isIdolGame});
 
   @override
   _Web3ViewState createState() => _Web3ViewState();
@@ -62,8 +64,10 @@ class _Web3ViewState extends State<Web3View> {
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       currentAddress = widget.address;
-      addXwgFloating();
-      insertOverlay(context);
+      if (widget.isIdolGame) {
+        addXwgFloating();
+        insertOverlay(context);
+      }
     });
   }
 
@@ -100,6 +104,24 @@ class _Web3ViewState extends State<Web3View> {
     } else {
       gotoHome();
     }
+    setState(() {
+      xwgFloating.close();
+      isOpening = true;
+    });
+  }
+
+  openExternalWeb(String title, String webUrl) {
+    DappConf externalDapp = GameConfig.idolDapp;
+    externalDapp.nameEn = title;
+    NavigatorUtils.pushTransparentPage(
+        context,
+        HalfWidthContainer(
+            content: Web3View(
+                dapp: externalDapp,
+                initialUrl: webUrl,
+                address: widget.address,
+                smartChain: ChainConfig.bep20,
+                isIdolGame: false)));
     setState(() {
       xwgFloating.close();
       isOpening = true;
@@ -231,17 +253,19 @@ class _Web3ViewState extends State<Web3View> {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
-      child: CupertinoPageScaffold(
-        child: Stack(children: [
+      child: Scaffold(
+        appBar: naviBar(),
+        body: Stack(children: [
           InAppWebView(
             initialUrlRequest: URLRequest(url: Uri.parse(widget.initialUrl)),
             initialOptions: InAppWebViewGroupOptions(
                 crossPlatform: InAppWebViewOptions(
                     javaScriptEnabled: true,
                     cacheEnabled: true,
+                    javaScriptCanOpenWindowsAutomatically: true,
                     supportZoom: false),
-                android:
-                    AndroidInAppWebViewOptions(useHybridComposition: true)),
+                android: AndroidInAppWebViewOptions(
+                    useHybridComposition: true, supportMultipleWindows: true)),
             initialUserScripts: Platform.isIOS
                 ? UnmodifiableListView<UserScript>([
                     UserScript(
@@ -257,6 +281,12 @@ class _Web3ViewState extends State<Web3View> {
             onWebViewCreated: (InAppWebViewController controller) {
               _web3Controller = controller;
               evaluateJavascript(_web3Controller);
+            },
+            onCreateWindow: (controller, createWindowRequest) async {
+              print("onCreateWindow");
+              openExternalWeb(createWindowRequest.request.url.host,
+                  createWindowRequest.request.url.toString());
+              return true;
             },
             onProgressChanged: (controller, progress) {
               setState(() {
@@ -364,6 +394,50 @@ class _Web3ViewState extends State<Web3View> {
                         })),
               );
       }),
+    );
+  }
+
+  Widget naviBar() {
+    return AppBar(
+      toolbarHeight: widget.isIdolGame ? 0 : 45,
+      backgroundColor: Colours.bg_color,
+      title: Container(
+        child: Text(
+          widget.dapp.nameEn,
+          style: TextStyle(color: Colors.white, fontSize: 15),
+        ),
+      ),
+      leading: Builder(
+        builder: (BuildContext context) {
+          return IconButton(
+            iconSize: 18,
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              _web3Controller.canGoBack().then((goBack) {
+                _web3Controller.goBack();
+              });
+            },
+            tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+          );
+        },
+      ),
+      actions: <Widget>[
+        IconButton(
+          iconSize: 18,
+          icon: Icon(
+            Icons.refresh,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            _web3Controller.reload();
+          },
+        ),
+      ],
+      centerTitle: true,
+      elevation: 0,
     );
   }
 }

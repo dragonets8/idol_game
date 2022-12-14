@@ -143,7 +143,7 @@ class DappHomeState extends State<DappHomePage>
                 initialUrl: dapp.url,
                 address: activeWallet["smart"],
                 smartChain: smartChain,
-                isFullscreen: false));
+                isIdolGame: false));
       });
       EasyLoading.dismiss();
     });
