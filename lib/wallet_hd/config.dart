@@ -4,8 +4,8 @@ import 'package:idol_game/wallet_hd/token_utils/doge_util.dart';
 
 enum ChainType { btc, erc20, bep20, hrc20 }
 
-const bool isPro = false;
-const bool isMainnet = false;
+const bool isPro = true;
+const bool isMainnet = true;
 const String etherApiKey = "WJ6BB548BUJHQ6KN9V5DIA41QH48UFPNKA";
 const String binanceApiKey = "ADC6EZFR2HRW3C5RHFQN85SFNSK6DCAWD5";
 const String huobiApiKey = "82MD8ZTJDTWJWK6F2KJHJNYHC7JG4UNY4T";
@@ -135,7 +135,7 @@ class GameConfig {
       nameCn: "Idol",
       nameEn: "Idol",
       url: isMainnet
-          ? "https://dreamidols.app/loading.html"
+          ? "https://test.dreamidols.app/loading.html"
           : "https://test2.dreamidols.app/loading.html",
       chainName: "BEP20",
       introductionCn: "",

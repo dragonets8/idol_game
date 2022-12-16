@@ -282,12 +282,12 @@ class _Web3ViewState extends State<Web3View> {
               _web3Controller = controller;
               evaluateJavascript(_web3Controller);
             },
-            onCreateWindow: (controller, createWindowRequest) async {
-              print("onCreateWindow");
-              openExternalWeb(createWindowRequest.request.url.host,
-                  createWindowRequest.request.url.toString());
-              return true;
-            },
+            // onCreateWindow: (controller, createWindowRequest) async {
+            //   print("onCreateWindow");
+            //   openExternalWeb(createWindowRequest.request.url.host,
+            //       createWindowRequest.request.url.toString());
+            //   return true;
+            // },
             onProgressChanged: (controller, progress) {
               setState(() {
                 loadProgress = progress;
@@ -362,6 +362,12 @@ class _Web3ViewState extends State<Web3View> {
         callback: (args) {
           print("showWallet\n$args");
           appLockJudge();
+        });
+    _web3Controller.addJavaScriptHandler(
+        handlerName: "openExternalWeb",
+        callback: (args) {
+          print("openExternalWeb\n$args");
+          openExternalWeb(args[0], args[1]);
         });
   }
 

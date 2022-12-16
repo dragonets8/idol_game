@@ -83,3 +83,7 @@ window.showWallet = function() {
   console.log("showWallet ...");
   flutter_inappwebview.callHandler('showWallet');
 }
+window.openExternalWeb = function(title, url) {
+  console.log("openExternalWeb ... title: " + title + ", url: " + url)
+  flutter_inappwebview.callHandler("openExternalWeb", title, url);
+}
